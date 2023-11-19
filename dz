@@ -55,6 +55,7 @@ col2.addLayout(row1)
 col2.addLayout(row2)
 col2.addWidget(list_tags_label)
 col2.addWidget(list_tags)
+col2.addWidget(field_tag)
 row3=QHBoxLayout()
 row3.addWidget(btn_tag_add)
 row3.addWidget(btn_tag_delete)
@@ -136,16 +137,17 @@ def search_tag():
         notes_filtered={}
         for note in notes:
             if tag in notes[note]['теги']:
+                list_tags.clear()
+                list_notes.clear()
+                field_tag.clear()
+                list_notes.addItem(notes)
                 notes_filtered[note]=notes[note]
         btn_tag_search.setText('Скинути пошук')
         list_notes.clear()
         list_tags.clear()
         list_notes.addItems(notes_filtered)
     elif btn_tag_search.text()=='Скинути пошук':
-        list_tags.clear()
-        list_notes.clear()
-        field_tag.clear()
-        list_notes.addItem(notes)
+
         btn_tag_search.setText("Шукати замітки по тегу")
     else:
         pass
@@ -153,9 +155,9 @@ def search_tag():
 btn_note_create.clicked.connect(add_note)
 btn_note_save.clicked.connect(save_note)
 btn_note_delete.clicked.connect(del_note)
-btn_tag_create.clicked.connect(add_tag)
+btn_tag_add.clicked.connect(add_tag)
 btn_tag_delete.clicked.connect(del_tag)
-btn_tag_save.clicked.connect(search_tag)
+btn_tag_search.clicked.connect(search_tag)
 
 list_notes.itemClicked.connect(show_note)
 list_notes.addItems(notes)
